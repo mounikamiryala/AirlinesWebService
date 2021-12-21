@@ -1,21 +1,29 @@
-package com.practice.demo.controller;
+package com.practice.airlines.controller;
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Positive;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import com.practice.demo.pojo.FlightDetailsPojo;
-import com.practice.demo.service.FlightService;
+import com.practice.airlines.pojo.FlightDetailsPojo;
+import com.practice.airlines.service.FlightService;
+
+
 @RestController
+//the below annotation enables validation on the path variables.
+@Validated
 public class MainController {
 	
 	@Autowired
     FlightService flightService;
 	
 	//HTTP GET method i.e. to retrieve the details
-	//Getmapping(path="/flight") or the below annotation also works.
+	//GetMapping(path="/flight") or the below annotation also works.
 	@RequestMapping(method =RequestMethod.GET,path = "/flight/{id}")
-	public FlightDetailsPojo getDetails(@PathVariable(name="id") Integer flightId) {
+	public FlightDetailsPojo getDetails(@PathVariable(name="id") @Positive Integer flightId) {
 		FlightDetailsPojo pojo= flightService.getDetails(flightId);
 		return pojo;
 	}
@@ -23,7 +31,7 @@ public class MainController {
 	//HTTP POST method i.e. to record the details
 	//@RequestMapping(method =RequestMethod.PUT,path = "/flight") or the below annotation also works
 	@PostMapping(path="/flight")
-	public FlightDetailsPojo recordDetails(@RequestBody FlightDetailsPojo pojo) {
+	public FlightDetailsPojo recordDetails(@RequestBody @Valid FlightDetailsPojo pojo) {
 		
 			return flightService.recordDetails(pojo);
 	}
@@ -41,7 +49,7 @@ public class MainController {
 	//@RequestMapping(method =RequestMethod.DELETE,path = "/flight") or the below annotation also works
 
 	@DeleteMapping(path="/flight/delete/{id}")
-	public String deleteDetails(@PathVariable(name="id") Integer flightId) {
+	public String deleteDetails(@PathVariable(name="id")@Positive Integer flightId) {
 			return "Deleted the details succesfully.";
 		}
 	
@@ -52,7 +60,7 @@ public class MainController {
 		return pojo;
 	}
 	
-	// GET method i.e. to retrieve flight details using Flight model
+	// GET method i.e. to retrieve flight details using given Flight model
  	@RequestMapping(method =RequestMethod.GET,path = "/flight/{model}")
 	public FlightDetailsPojo getFlightDetailsByModel(@PathVariable(name="model") String model) {
 		FlightDetailsPojo pojo= flightService.getFlightDetailsByModel(model);

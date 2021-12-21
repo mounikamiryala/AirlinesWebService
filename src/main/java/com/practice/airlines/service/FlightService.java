@@ -1,9 +1,9 @@
-package com.practice.demo.service;
+package com.practice.airlines.service;
 
 
 import java.util.List;
 
-import com.practice.demo.pojo.FlightDetailsPojo;
+import com.practice.airlines.pojo.FlightDetailsPojo;
 
 public interface FlightService {
 	

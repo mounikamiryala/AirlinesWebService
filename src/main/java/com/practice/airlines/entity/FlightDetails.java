@@ -1,21 +1,35 @@
-package com.practice.demo.pojo;
+package com.practice.airlines.entity;
 
 import java.util.Date;
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class FlightDetailsPojo {
+@Entity(name="flightdetails")
+public class FlightDetails {
 
-	
+	@Id
+	@Column(name="flight_id")
+	//Uncomment it if we want to auto increment the id value generation,now I want to directly insert the records along with the id.
+	//@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private Integer id;
 	
+	@Column(name="flight_capacity",nullable=false)
 	private Integer capacity;
 	
+	@Column(name="mfg_company",nullable=false)
 	private String manufacturingCompany;
 	
+	@Column(name="flight_model",nullable=false)
 	private String model;
 	
+	@Column(name="mfg_date",nullable=false)
 	@JsonFormat(pattern="MM/dd/yyyy")
 	private Date manufacturedDate;
 
@@ -32,15 +46,8 @@ public class FlightDetailsPojo {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		FlightDetailsPojo other = (FlightDetailsPojo) obj;
+		FlightDetails other = (FlightDetails) obj;
 		return Objects.equals(id, other.id);
-	}
-
-	@Override
-	public String toString() {
-		return "FlightDetailsPojo [id=" + id + ", capacity=" + capacity
-				+ ", manufacturingCompany=" + manufacturingCompany + ", model=" + model + ", manufacturedDate="
-				+ manufacturedDate + "]";
 	}
 
 	public Integer getId() {
@@ -50,7 +57,6 @@ public class FlightDetailsPojo {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 	public int getCapacity() {
 		return capacity;
 	}
@@ -67,14 +73,6 @@ public class FlightDetailsPojo {
 		this.manufacturingCompany = manufacturingCompany;
 	}
 
-	public String getModel() {
-		return model;
-	}
-
-	public void setModel(String model) {
-		this.model = model;
-	}
-
 	public Date getManufacturedDate() {
 		return manufacturedDate;
 	}
@@ -83,4 +81,11 @@ public class FlightDetailsPojo {
 		this.manufacturedDate = manufacturedDate;
 	}
 
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
 }

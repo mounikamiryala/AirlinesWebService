@@ -1,35 +1,35 @@
-package com.practice.demo.entity;
+
+package com.practice.airlines.pojo;
+
+import javax.annotation.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.PositiveOrZero;
 
 import java.util.Date;
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.practice.airlines.validations.FlightManufacturer;
 
-@Entity(name="flightdetails")
-public class FlightDetails {
+public class FlightDetailsPojo {
 
-	@Id
-	@Column(name="flight_id")
-	//Uncomment it if we want to auto increment the id value generation,now I want to directly insert the records along with the id.
-	//@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@NotNull
 	private Integer id;
 	
-	@Column(name="flight_capacity",nullable=false)
+	@NotNull
+	@PositiveOrZero
 	private Integer capacity;
 	
-	@Column(name="mfg_company",nullable=false)
+	@NotNull
+	@FlightManufacturer
 	private String manufacturingCompany;
 	
-	@Column(name="flight_model",nullable=false)
+	@NotNull
 	private String model;
 	
-	@Column(name="mfg_date",nullable=false)
+	@NotNull
+	@Past
 	@JsonFormat(pattern="MM/dd/yyyy")
 	private Date manufacturedDate;
 
@@ -46,8 +46,15 @@ public class FlightDetails {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		FlightDetails other = (FlightDetails) obj;
+		FlightDetailsPojo other = (FlightDetailsPojo) obj;
 		return Objects.equals(id, other.id);
+	}
+
+	@Override
+	public String toString() {
+		return "FlightDetailsPojo [id=" + id + ", capacity=" + capacity
+				+ ", manufacturingCompany=" + manufacturingCompany + ", model=" + model + ", manufacturedDate="
+				+ manufacturedDate + "]";
 	}
 
 	public Integer getId() {
@@ -57,6 +64,7 @@ public class FlightDetails {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public int getCapacity() {
 		return capacity;
 	}
@@ -73,6 +81,14 @@ public class FlightDetails {
 		this.manufacturingCompany = manufacturingCompany;
 	}
 
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
 	public Date getManufacturedDate() {
 		return manufacturedDate;
 	}
@@ -81,11 +97,4 @@ public class FlightDetails {
 		this.manufacturedDate = manufacturedDate;
 	}
 
-	public String getModel() {
-		return model;
-	}
-
-	public void setModel(String model) {
-		this.model = model;
-	}
 }

@@ -1,10 +1,7 @@
-package com.practice.demo.service;
+package com.practice.airlines.service;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -12,9 +9,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.practice.demo.entity.FlightDetails;
-import com.practice.demo.pojo.FlightDetailsPojo;
-import com.practice.demo.repository.FlightRepository;
+import com.practice.airlines.entity.FlightDetails;
+import com.practice.airlines.pojo.FlightDetailsPojo;
+import com.practice.airlines.repository.FlightRepository;
 
 
 @Service
@@ -33,7 +30,7 @@ public class FlightServiceImpl implements FlightService{
 		BeanUtils.copyProperties(data, flightDetails);
 		// save the values in the table and generate the unique id for the flights
 		flightDetails=repo.save(flightDetails);
-		// copying the input from the table along with the id and return the same pojo to the user in the fornt-end i.e request body.
+		// copying the input from the table along with the id and return the same pojo to the user in the front-end i.e request body.
 		BeanUtils.copyProperties(flightDetails,data);
 		// return the pojo
 		System.out.println("Successfully recorded.");
@@ -103,7 +100,7 @@ public class FlightServiceImpl implements FlightService{
 		 		repo.deleteById(flightId);	
 				 System.out.println("Deleted the record succesfully!");
 		 		}
-		 	//else throws customised exception.
+		 	//else throws customized exception.
 		 	else {
 		 		//throw exception}
 		 	} 
