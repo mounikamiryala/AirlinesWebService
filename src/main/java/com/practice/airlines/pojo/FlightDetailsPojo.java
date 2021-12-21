@@ -18,7 +18,7 @@ public class FlightDetailsPojo {
 	private Integer id;
 	
 	@NotNull
-	@PositiveOrZero
+	@PositiveOrZero(message="capacity cannot be a negative vaalue.")
 	private Integer capacity;
 	
 	@NotNull
@@ -29,7 +29,7 @@ public class FlightDetailsPojo {
 	private String model;
 	
 	@NotNull
-	@Past
+	@Past(message="ManufacturedDate cannot be a future date.")
 	@JsonFormat(pattern="MM/dd/yyyy")
 	private Date manufacturedDate;
 

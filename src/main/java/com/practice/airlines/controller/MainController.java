@@ -61,7 +61,7 @@ public class MainController {
 	}
 	
 	// GET method i.e. to retrieve flight details using given Flight model
- 	@RequestMapping(method =RequestMethod.GET,path = "/flight/{model}")
+ 	@RequestMapping(method =RequestMethod.GET,path = "/flight/model/{model}")
 	public FlightDetailsPojo getFlightDetailsByModel(@PathVariable(name="model") String model) {
 		FlightDetailsPojo pojo= flightService.getFlightDetailsByModel(model);
 		return pojo;

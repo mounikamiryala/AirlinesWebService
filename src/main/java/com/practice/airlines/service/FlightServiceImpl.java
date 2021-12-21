@@ -7,7 +7,9 @@ import java.util.stream.StreamSupport;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.practice.airlines.entity.FlightDetails;
 import com.practice.airlines.pojo.FlightDetailsPojo;
@@ -54,6 +56,7 @@ public class FlightServiceImpl implements FlightService{
 		 	//else throws customised exception.
 		 	else {
 		 		//Throw Exception
+		 		throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No flight details available for the given flight id.");
 		 		}
 		 	//return the pojo of the flightdetails
 		 	return pojo;
@@ -81,6 +84,7 @@ public class FlightServiceImpl implements FlightService{
 	 	//else throws customised exception.
 	 	else {
 	 		//Throw Exception
+	 		throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No flight details available for the given flight id.");
 	 		}
 	 	//return the pojo of the flightdetails
 	 	return pojo;
@@ -102,7 +106,8 @@ public class FlightServiceImpl implements FlightService{
 		 		}
 		 	//else throws customized exception.
 		 	else {
-		 		//throw exception}
+		 		//throw exception
+		 		throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No flight details available for the given flight id.");
 		 	} 
 		}
 	
